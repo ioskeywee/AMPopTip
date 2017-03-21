@@ -69,6 +69,7 @@
     _font = kDefaultFont;
     _textColor = kDefaultTextColor;
     _popoverColor = kDefaultBackgroundColor;
+    _contentColor = kDefaultBackgroundColor;
     _borderColor = kDefaultBorderColor;
     _borderWidth = kDefaultBorderWidth;
     _radius = kDefaultRadius;
@@ -315,6 +316,10 @@
     [self.borderColor setStroke];
     [path setLineWidth:self.borderWidth];
     [path stroke];
+
+    UIBezierPath *contentPath = [self pathForContentWithRect:rect direction:self.direction];
+    [self.contentColor setFill];
+    [contentPath fill];
 
     self.paragraphStyle.alignment = self.textAlignment;
 

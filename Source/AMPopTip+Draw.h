@@ -20,4 +20,14 @@
  */
 - (nonnull UIBezierPath *)pathWithRect:(CGRect)rect direction:(AMPopTipDirection)direction;
 
+/** Poptip's Bezier path
+ *
+ * Returns the path used to draw the poptip content background, used internally by the poptip.
+ *
+ * @param rect The rect holding the poptip
+ * @param direction The direction of the poptip appearance
+ * @return UIBezierPath The poptip's content path
+ */
+- (nonnull UIBezierPath *)pathForContentWithRect:(CGRect)rect direction:(AMPopTipDirection)direction;
+
 @end

@@ -104,4 +104,61 @@
     return path;
 }
 
+- (UIBezierPath *)pathForContentWithRect:(CGRect)rect direction:(AMPopTipDirection)direction {
+    UIBezierPath *path = [[UIBezierPath alloc] init];
+    CGRect baloonFrame;
+    
+    // Drawing a round rect and the arrow alone sometime shows a white halfpixel line, so here's a fun bit of code... feel free to fall asleep
+    switch (direction) {
+        case AMPopTipDirectionNone: {
+            baloonFrame = (CGRect){
+                (CGPoint){ self.borderWidth, self.borderWidth },
+                (CGSize){ self.frame.size.width - self.borderWidth * 2, self.frame.size.height - self.borderWidth * 2}
+            };
+            break;
+        }
+            
+        case AMPopTipDirectionDown: {
+            baloonFrame = (CGRect){
+                (CGPoint){ 0, self.arrowSize.height + self.borderWidth },
+                (CGSize){ rect.size.width - self.borderWidth, rect.size.height - self.arrowSize.height - self.borderWidth}
+            };
+            break;
+        }
+            
+        case AMPopTipDirectionUp: {
+            baloonFrame = (CGRect){
+                (CGPoint){ 0, 0 },
+                (CGSize){ rect.size.width - self.borderWidth, rect.size.height - self.arrowSize.height - self.borderWidth}
+            };
+            
+            break;
+        }
+            
+        case AMPopTipDirectionLeft: {
+            // Flip the size around for the left/right poptip
+            CGSize arrowSize = CGSizeMake(self.arrowSize.height, self.arrowSize.width);
+            baloonFrame = (CGRect){
+                (CGPoint){ 0, 0 },
+                (CGSize){ rect.size.width - arrowSize.width - self.borderWidth, rect.size.height - self.borderWidth * 2}
+            };
+            break;
+        }
+            
+        case AMPopTipDirectionRight: {
+            // Flip the size around for the left/right poptip
+            CGSize arrowSize = CGSizeMake(self.arrowSize.height, self.arrowSize.width);
+            baloonFrame = (CGRect){
+                (CGPoint){ arrowSize.width + self.borderWidth, 0 },
+                (CGSize){ rect.size.width - arrowSize.width - self.borderWidth, rect.size.height - self.borderWidth * 2}
+            };
+            
+            break;
+        }
+    }
+    path = [UIBezierPath bezierPathWithRoundedRect:baloonFrame cornerRadius:self.radius];
+    return path;
+}
+
+
 @end

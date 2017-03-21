@@ -233,6 +233,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong) UIColor *popoverColor UI_APPEARANCE_SELECTOR;
 
+/** Popover content view Color
+ *
+ * Holds the UIColor for the popover's content background
+ */
+@property (nonatomic, strong) UIColor *contentColor UI_APPEARANCE_SELECTOR;
+
 /** Popover Border Color
  *
  * Holds the UIColor for the popover's bordedr
